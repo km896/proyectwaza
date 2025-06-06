@@ -1,37 +1,212 @@
+let cart = [];
+const cartSidebar = document.querySelector('.cart-sidebar');
+const cartOverlay = document.querySelector('.cart-overlay');
+const closeCartBtn = document.querySelector('.close-cart');
+const cartItemsContainer = document.querySelector('.cart-items');
+const cartTotal = document.querySelector('.cart-total span');
+const cartCount = document.querySelector('.cart-count');
+const checkoutBtn = document.querySelector('.checkout-btn');
+
+// Open/close cart
+document.querySelector('.cart-icon').addEventListener('click', () => {
+    cartSidebar.classList.add('active');
+    cartOverlay.classList.add('active');
+});
+
+closeCartBtn.addEventListener('click', () => {
+    cartSidebar.classList.remove('active');
+    cartOverlay.classList.remove('active');
+});
+
+cartOverlay.addEventListener('click', () => {
+    cartSidebar.classList.remove('active');
+    cartOverlay.classList.remove('active');
+});
+
+// Add to cart
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', () => {
+        const product = {
+            id: button.dataset.id,
+            name: button.dataset.name,
+            price: parseFloat(button.dataset.price)
+        };
+        cart.push(product);
+        updateCart();
+    });
+});
+
+// Update cart UI
+function updateCart() {
+    cartItemsContainer.innerHTML = '';
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
+    } else {
+        cart.forEach((item, index) => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <p>$${item.price.toFixed(2)}</p>
+                </div>
+                <button class="remove-item" data-index="${index}">Eliminar</button>
+            `;
+            cartItemsContainer.appendChild(cartItem);
+        });
+    }
+
+    // Update total and count
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    cartTotal.textContent = `$${total.toFixed(2)}`;
+    cartCount.textContent = cart.length;
+
+    // Add remove item functionality
+    document.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', () => {
+            const index = button.dataset.index;
+            cart.splice(index, 1);
+            updateCart();
+        });
+    });
+}
+
+// PDF Generation
+checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) {
+        alert('Tu carrito está vacío');
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Add store info
+    doc.setFontSize(18);
+    doc.text('Zapatería Jiménez', 20, 20);
+    doc.setFontSize(12);
+    doc.text('Av. Principal 123, Centro, Ciudad', 20, 30);
+    doc.text('info@zapateriajimenez.com', 20, 35);
+    doc.text('(555) 123-4567', 20, 40);
+    doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 20, 45);
+
+    // Add purchase details
+    doc.setFontSize(14);
+    doc.text('Recibo de Compra', 20, 60);
+    let y = 70;
+    cart.forEach(item => {
+        doc.text(`${item.name}: $${item.price.toFixed(2)}`, 20, y);
+        y += 10;
+    });
+
+    // Add total
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    doc.setFontSize(12);
+    doc.text(`Total: $${total.toFixed(2)}`, 20, y + 10);
+
+    // Save PDF
+    doc.save('recibo_zapateria_jimenez.pdf');
+
+    // Clear cart after purchase
+    cart = [];
+    updateCart();
+    cartSidebar.classList.remove('active');
+    cartOverlay.classList.remove('active');
+    alert('Compra realizada con éxito. El recibo ha sido descargado.');
+});
+
+// Comments Section
+const commentForm = document.querySelector('#comment-form');
+const commentsContainer = document.querySelector('.comments-grid');
+
+// Load comments from localStorage
+function loadComments() {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    commentsContainer.innerHTML = '';
+    comments.forEach(comment => {
+        const commentCard = document.createElement('div');
+        commentCard.classList.add('comment-card');
+        commentCard.innerHTML = `
+            <div class="rating">
+                ${'<i class="fas fa-star"></i>'.repeat(comment.rating)}
+                ${'<i class="far fa-star"></i>'.repeat(5 - comment.rating)}
+            </div>
+            <p>"${comment.text}"</p>
+            <div class="client-info">
+                <div>
+                    <h4>${comment.name}</h4>
+                    <span>${new Date(comment.date).toLocaleDateString()}</span>
+                </div>
+            </div>
+        `;
+        commentsContainer.appendChild(commentCard);
+    });
+}
+
+// Submit comment
+commentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = commentForm.querySelector('input[name="name"]').value;
+    const text = commentForm.querySelector('textarea[name="comment"]').value;
+    const rating = parseInt(commentForm.querySelector('select[name="rating"]').value);
+
+    const comment = {
+        name,
+        text,
+        rating,
+        date: new Date().toISOString()
+    };
+
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.push(comment);
+    localStorage.setItem('comments', JSON.stringify(comments));
+
+    commentForm.reset();
+    loadComments();
+});
+
+// Initialize comments
+loadComments();
 document.addEventListener('DOMContentLoaded', function() {
     // Variables
-    let cart = [];
     const cartIcon = document.querySelector('.cart-icon');
-    const cartModal = document.querySelector('.cart-modal');
+    const cartSidebar = document.querySelector('.cart-sidebar');
+    const cartOverlay = document.querySelector('.cart-overlay');
     const closeCart = document.querySelector('.close-cart');
-    const cartItemsContainer = document.querySelector('.cart-items');
-    const cartCount = document.querySelector('.cart-count');
-    const totalAmount = document.querySelector('.total-amount');
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    const checkoutBtn = document.querySelector('.checkout-btn');
-    const contactForm = document.getElementById('contactForm');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartTotal = document.querySelector('.cart-total span');
+    const cartCount = document.querySelector('.cart-count');
+
+    let cart = [];
 
     // Abrir carrito
-    cartIcon.addEventListener('click', () => {
-        cartModal.classList.add('active');
-        renderCartItems();
+    cartIcon.addEventListener('click', function() {
+        cartSidebar.classList.add('active');
+        cartOverlay.classList.add('active');
     });
 
     // Cerrar carrito
-    closeCart.addEventListener('click', () => {
-        cartModal.classList.remove('active');
+    closeCart.addEventListener('click', function() {
+        cartSidebar.classList.remove('active');
+        cartOverlay.classList.remove('active');
     });
 
-    // Añadir producto al carrito
+    cartOverlay.addEventListener('click', function() {
+        cartSidebar.classList.remove('active');
+        cartOverlay.classList.remove('active');
+    });
+
+    // Añadir al carrito
     addToCartButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', function() {
             const id = button.getAttribute('data-id');
             const name = button.getAttribute('data-name');
             const price = parseFloat(button.getAttribute('data-price'));
-            
+
             // Verificar si el producto ya está en el carrito
             const existingItem = cart.find(item => item.id === id);
-            
+
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
@@ -42,127 +217,133 @@ document.addEventListener('DOMContentLoaded', function() {
                     quantity: 1
                 });
             }
-            
-            updateCartCount();
-            showAddToCartFeedback(button);
+
+            updateCart();
+
+            // Mostrar notificación
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = `${name} añadido al carrito`;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
         });
     });
+
+    // Actualizar carrito
+    function updateCart() {
+        renderCartItems();
+        updateCartTotal();
+        updateCartCount();
+    }
 
     // Renderizar items del carrito
     function renderCartItems() {
         cartItemsContainer.innerHTML = '';
-        
+
         if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p>Tu carrito está vacío</p>';
-            totalAmount.textContent = '$0.00';
+            cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
             return;
         }
-        
-        let total = 0;
-        
+
         cart.forEach(item => {
-            const itemTotal = item.price * item.quantity;
-            total += itemTotal;
-            
             const cartItemElement = document.createElement('div');
-            cartItemElement.classList.add('cart-item');
+            cartItemElement.className = 'cart-item';
+
             cartItemElement.innerHTML = `
+                <img src="https://via.placeholder.com/80" alt="${item.name}">
                 <div class="cart-item-info">
-                    <div class="cart-item-name">${item.name} x${item.quantity}</div>
-                    <div class="cart-item-price">$${(itemTotal).toFixed(2)}</div>
-                </div>
-                <div class="cart-item-actions">
-                    <span class="cart-item-remove" data-id="${item.id}">🗑️</span>
+                    <h4>${item.name}</h4>
+                    <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                    <div class="cart-item-quantity">
+                        <button class="decrease-quantity" data-id="${item.id}">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="increase-quantity" data-id="${item.id}">+</button>
+                    </div>
+                    <span class="cart-item-remove" data-id="${item.id}">Eliminar</span>
                 </div>
             `;
-            
+
             cartItemsContainer.appendChild(cartItemElement);
         });
-        
-        totalAmount.textContent = `$${total.toFixed(2)}`;
-        
-        // Añadir event listeners a los botones de eliminar
+
+        // Event listeners para botones de cantidad
+        document.querySelectorAll('.decrease-quantity').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const item = cart.find(item => item.id === id);
+
+                if (item.quantity > 1) {
+                    item.quantity -= 1;
+                } else {
+                    cart = cart.filter(item => item.id !== id);
+                }
+
+                updateCart();
+            });
+        });
+
+        document.querySelectorAll('.increase-quantity').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const item = cart.find(item => item.id === id);
+                item.quantity += 1;
+                updateCart();
+            });
+        });
+
+        // Event listeners para eliminar
         document.querySelectorAll('.cart-item-remove').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const itemId = e.target.getAttribute('data-id');
-                removeFromCart(itemId);
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                cart = cart.filter(item => item.id !== id);
+                updateCart();
             });
         });
     }
 
-    // Eliminar item del carrito
-    function removeFromCart(itemId) {
-        cart = cart.filter(item => item.id !== itemId);
-        updateCartCount();
-        renderCartItems();
+    // Actualizar total del carrito
+    function updateCartTotal() {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotal.textContent = `$${total.toFixed(2)}`;
     }
 
     // Actualizar contador del carrito
     function updateCartCount() {
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        cartCount.textContent = totalItems;
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = count;
     }
 
-    // Mostrar feedback al añadir al carrito
-    function showAddToCartFeedback(button) {
-        const originalText = button.textContent;
-        button.textContent = '¡Añadido!';
-        button.style.backgroundColor = '#27ae60';
-        
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.style.backgroundColor = '#e67e22';
-        }, 1500);
-    }
-
-    // Procesar pago
-    checkoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert('Tu carrito está vacío');
-            return;
+    // Estilos para la notificación
+    const style = document.createElement('style');
+    style.textContent = `
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #5a4e3c;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 2000;
         }
         
-        // Aquí iría la integración con el servicio de pago
-        alert('Redirigiendo a la pasarela de pago...');
-        
-        // Simular pago exitoso
-        setTimeout(() => {
-            alert('¡Pago exitoso! Gracias por tu compra.');
-            cart = [];
-            updateCartCount();
-            renderCartItems();
-            cartModal.classList.remove('active');
-        }, 2000);
-    });
-
-    // Manejar formulario de contacto
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // Aquí iría el código para enviar el formulario a un servidor
-            alert(`Gracias ${name}, tu mensaje ha sido enviado. Te responderemos a ${email} pronto.`);
-            
-            contactForm.reset();
-        });
-    }
-
-    // Smooth scrolling para enlaces del menú
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        });
-    });
+        .notification.show {
+            opacity: 1;
+        }
+    `;
+    document.head.appendChild(style);
 });
