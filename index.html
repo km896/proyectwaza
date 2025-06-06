@@ -1,190 +1,580 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zapatería Jiménez - Calzado de calidad</title>
+    <title>Zapatería Jiménez - Calzado de calidad desde 1990</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
     <header>
         <div class="container">
             <div class="logo">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA12fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Logo Zapatería Jiménez">
                 <h1>Zapatería <span>Jiménez</span></h1>
             </div>
             <nav>
                 <ul>
                     <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#hombres">Hombres</a></li>
+                    <li><a href="#mujeres">Mujeres</a></li>
+                    <li><a href="#ninos">Niños</a></li>
                     <li><a href="#ofertas">Ofertas</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">0</span>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar zapatos...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="container">
-            <h2>Calzado de calidad para toda la familia</h2>
-            <p>Descubre nuestra colección de temporada con los mejores precios</p>
-            <a href="#productos" class="btn">Ver productos</a>
+            <div class="hero-content">
+                <h2>Calzado artesanal <span>para toda la familia</span></h2>
+                <p>30 años de tradición en calzado de calidad</p>
+                <a href="#hombres" class="btn">Ver colección</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Zapatos de calidad">
+            </div>
         </div>
     </section>
 
-    <section class="products" id="productos">
+    <!-- Featured Categories -->
+    <section class="categories">
         <div class="container">
-            <h2>Nuestros Productos</h2>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="Zapatos para hombre">
+                <h3>Hombres</h3>
+                <a href="#hombres" class="btn-outline">Ver más</a>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Zapatos para mujer">
+                <h3>Mujeres</h3>
+                <a href="#mujeres" class="btn-outline">Ver más</a>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1179&q=80" alt="Zapatos para niños">
+                <h3>Niños</h3>
+                <a href="#ninos" class="btn-outline">Ver más</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Men's Shoes Section -->
+    <section class="products-section" id="hombres">
+        <div class="container">
+            <h2 class="section-title">Zapatos para <span>Hombres</span></h2>
             <div class="product-grid">
                 <!-- Producto 1 -->
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/300x200?text=Zapatos+Hombres" alt="Zapatos para hombre">
-                    <h3>Zapato Casual Hombre</h3>
-                    <p class="price">$1,299.00 MXN</p>
-                    <button class="add-to-cart" data-id="1" data-name="Zapato Casual Hombre" data-price="1299">Añadir al carrito</button>
+                    <div class="product-badge">Nuevo</div>
+                    <img src="https://images.unsplash.com/photo-1597045566677-8cf032ed6634?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Zapato casual hombre">
+                    <div class="product-info">
+                        <h3>Oxford Negro</h3>
+                        <div class="product-meta">
+                            <span class="price">$1,450.00</span>
+                            <div class="colors">
+                                <span class="color black"></span>
+                                <span class="color brown"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="101" data-name="Oxford Negro" data-price="1450">Añadir al carrito</button>
+                    </div>
                 </div>
-                
+
                 <!-- Producto 2 -->
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/300x200?text=Zapatos+Dama" alt="Zapatos para dama">
-                    <h3>Zapato Elegante Dama</h3>
-                    <p class="price">$1,099.00 MXN</p>
-                    <button class="add-to-cart" data-id="2" data-name="Zapato Elegante Dama" data-price="1099">Añadir al carrito</button>
+                    <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=698&q=80" alt="Zapato deportivo hombre">
+                    <div class="product-info">
+                        <h3>Tenis Running</h3>
+                        <div class="product-meta">
+                            <span class="price">$1,250.00</span>
+                            <div class="colors">
+                                <span class="color blue"></span>
+                                <span class="color gray"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="102" data-name="Tenis Running" data-price="1250">Añadir al carrito</button>
+                    </div>
                 </div>
-                
+
                 <!-- Producto 3 -->
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/300x200?text=Tenis+Niños" alt="Tenis para niños">
-                    <h3>Tenis Deportivo Niño</h3>
-                    <p class="price">$899.00 MXN</p>
-                    <button class="add-to-cart" data-id="3" data-name="Tenis Deportivo Niño" data-price="899">Añadir al carrito</button>
+                    <div class="product-badge">-20%</div>
+                    <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Botas hombre">
+                    <div class="product-info">
+                        <h3>Botas de Cuero</h3>
+                        <div class="product-meta">
+                            <span class="price"><del>$1,800.00</del> $1,440.00</span>
+                            <div class="colors">
+                                <span class="color brown"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="103" data-name="Botas de Cuero" data-price="1440">Añadir al carrito</button>
+                    </div>
                 </div>
-                
+
                 <!-- Producto 4 -->
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/300x200?text=Botas+Mujer" alt="Botas para mujer">
-                    <h3>Bota Casual Mujer</h3>
-                    <p class="price">$1,499.00 MXN</p>
-                    <button class="add-to-cart" data-id="4" data-name="Bota Casual Mujer" data-price="1499">Añadir al carrito</button>
+                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Zapatos casuales hombre">
+                    <div class="product-info">
+                        <h3>Mocasín Café</h3>
+                        <div class="product-meta">
+                            <span class="price">$1,350.00</span>
+                            <div class="colors">
+                                <span class="color brown"></span>
+                                <span class="color beige"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="104" data-name="Mocasín Café" data-price="1350">Añadir al carrito</button>
+                    </div>
                 </div>
             </div>
+            <a href="#hombres" class="view-all">Ver todos los zapatos para hombres →</a>
         </div>
     </section>
 
-    <section class="offers" id="ofertas">
+    <!-- Women's Shoes Section -->
+    <section class="products-section" id="mujeres">
         <div class="container">
-            <h2>Ofertas Especiales</h2>
+            <h2 class="section-title">Zapatos para <span>Mujeres</span></h2>
+            <div class="product-grid">
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <div class="product-badge">Más vendido</div>
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1112&q=80" alt="Tacones mujer">
+                    <div class="product-info">
+                        <h3>Tacones Elegantes</h3>
+                        <div class="product-meta">
+                            <span class="price">$1,290.00</span>
+                            <div class="colors">
+                                <span class="color black"></span>
+                                <span class="color red"></span>
+                                <span class="color nude"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="201" data-name="Tacones Elegantes" data-price="1290">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Zapatillas mujer">
+                    <div class="product-info">
+                        <h3>Zapatillas Deportivas</h3>
+                        <div class="product-meta">
+                            <span class="price">$1,150.00</span>
+                            <div class="colors">
+                                <span class="color white"></span>
+                                <span class="color pink"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="202" data-name="Zapatillas Deportivas" data-price="1150">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <div class="product-badge">-15%</div>
+                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Sandalias mujer">
+                    <div class="product-info">
+                        <h3>Sandalias de Verano</h3>
+                        <div class="product-meta">
+                            <span class="price"><del>$950.00</del> $807.50</span>
+                            <div class="colors">
+                                <span class="color gold"></span>
+                                <span class="color silver"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="203" data-name="Sandalias de Verano" data-price="807.5">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=698&q=80" alt="Botas mujer">
+                    <div class="product-info">
+                        <h3>Botas de Cuero</h3>
+                        <div class="product-meta">
+                            <span class="price">$1,650.00</span>
+                            <div class="colors">
+                                <span class="color black"></span>
+                                <span class="color brown"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="204" data-name="Botas de Cuero" data-price="1650">Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+            <a href="#mujeres" class="view-all">Ver todos los zapatos para mujeres →</a>
+        </div>
+    </section>
+
+    <!-- Kids Shoes Section -->
+    <section class="products-section" id="ninos">
+        <div class="container">
+            <h2 class="section-title">Zapatos para <span>Niños</span></h2>
+            <div class="product-grid">
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1179&q=80" alt="Tenis niño">
+                    <div class="product-info">
+                        <h3>Tenis Infantiles</h3>
+                        <div class="product-meta">
+                            <span class="price">$790.00</span>
+                            <div class="colors">
+                                <span class="color blue"></span>
+                                <span class="color red"></span>
+                                <span class="color green"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="301" data-name="Tenis Infantiles" data-price="790">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <div class="product-badge">Nuevo</div>
+                    <img src="https://images.unsplash.com/photo-1543508288-aea5850c9a4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Sandalias niño">
+                    <div class="product-info">
+                        <h3>Sandalias Verano</h3>
+                        <div class="product-meta">
+                            <span class="price">$650.00</span>
+                            <div class="colors">
+                                <span class="color blue"></span>
+                                <span class="color pink"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="302" data-name="Sandalias Verano" data-price="650">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Zapatos escolares niño">
+                    <div class="product-info">
+                        <h3>Zapatos Escolares</h3>
+                        <div class="product-meta">
+                            <span class="price">$890.00</span>
+                            <div class="colors">
+                                <span class="color black"></span>
+                                <span class="color navy"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="303" data-name="Zapatos Escolares" data-price="890">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="product-card">
+                    <div class="product-badge">-25%</div>
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="Botas niño">
+                    <div class="product-info">
+                        <h3>Botas Infantiles</h3>
+                        <div class="product-meta">
+                            <span class="price"><del>$1,100.00</del> $825.00</span>
+                            <div class="colors">
+                                <span class="color brown"></span>
+                                <span class="color black"></span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart" data-id="304" data-name="Botas Infantiles" data-price="825">Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+            <a href="#ninos" class="view-all">Ver todos los zapatos para niños →</a>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section class="special-offers" id="ofertas">
+        <div class="container">
+            <h2 class="section-title">Ofertas <span>Especiales</span></h2>
             <div class="offer-banner">
                 <div class="offer-content">
-                    <h3>2x1 en sandalias</h3>
-                    <p>Solo este mes de junio</p>
-                    <a href="#productos" class="btn">Aprovechar oferta</a>
+                    <h3>Hasta 40% de descuento</h3>
+                    <p>En toda la colección de verano</p>
+                    <p class="offer-time">Oferta válida hasta el 30 de agosto</p>
+                    <a href="#ofertas" class="btn">Comprar ahora</a>
+                </div>
+                <div class="offer-image">
+                    <img src="https://images.unsplash.com/photo-1463100099107-aa0980c362e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Oferta especial">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="about" id="nosotros">
+    <!-- Testimonials -->
+    <section class="testimonials">
         <div class="container">
-            <h2>Sobre Nosotros</h2>
+            <h2 class="section-title">Lo que dicen <span>nuestros clientes</span></h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Los zapatos más cómodos que he usado. Llevo comprando aquí más de 10 años y nunca me han decepcionado."</p>
+                    <div class="client-info">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente">
+                        <div>
+                            <h4>Carlos Mendoza</h4>
+                            <span>Cliente desde 2012</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"Excelente calidad y atención. Compré unos zapatos para mi hijo y han resistido todo el año escolar sin problemas."</p>
+                    <div class="client-info">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente">
+                        <div>
+                            <h4>Laura González</h4>
+                            <span>Cliente desde 2018</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Encontré unos tacones perfectos para mi boda. Hermosos, cómodos y a un precio razonable. ¡Recomendadísimos!"</p>
+                    <div class="client-info">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente">
+                        <div>
+                            <h4>Ana Rodríguez</h4>
+                            <span>Cliente desde 2020</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comments">
+        <div class="container">
+            <h2 class="section-title">Deja tu <span>comentario</span></h2>
+            <div class="comment-form">
+                <form id="comment-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="comment" placeholder="Tu comentario" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Calificación:</label>
+                        <select name="rating" required>
+                            <option value="1">1 Estrella</option>
+                            <option value="2">2 Estrellas</option>
+                            <option value="3">3 Estrellas</option>
+                            <option value="4">4 Estrellas</option>
+                            <option value="5">5 Estrellas</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Enviar comentario</button>
+                </form>
+            </div>
+            <div class="comments-grid">
+            </div>
+        </div>
+    </section>
+
+    <section class="about-us">
+        <div class="container">
             <div class="about-content">
-                <div class="about-text">
-                    <p>Zapatería Jiménez es una empresa familiar con más de 30 años de experiencia en la venta de calzado de calidad. Nos enorgullecemos de ofrecer productos duraderos, cómodos y a precios justos.</p>
-                    <p>Nuestro compromiso es con la satisfacción del cliente, por eso garantizamos todos nuestros productos.</p>
+                <h2>Nuestra <span>historia</span></h2>
+                <p>Fundada en 1990 por el Sr. Roberto Jiménez, nuestra zapatería comenzó como un pequeño taller familiar en el centro de la ciudad. Con dedicación y pasión por el calzado de calidad, hemos crecido hasta convertirnos en una de las zapaterías
+                    más reconocidas de la región.</p>
+                <p>Hoy, mantenemos los mismos valores de siempre: calidad artesanal, materiales premium y un servicio personalizado que nos distingue.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">30+</span>
+                        <span class="stat-label">Años de experiencia</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15,000+</span>
+                        <span class="stat-label">Clientes satisfechos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Calidad garantizada</span>
+                    </div>
                 </div>
-                <div class="about-image">
-                    <img src="https://via.placeholder.com/500x300?text=Local+Zapatería" alt="Local de Zapatería Jiménez">
-                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" alt="Taller de zapatería">
             </div>
         </div>
     </section>
 
     <section class="contact" id="contacto">
         <div class="container">
-            <h2>Contacto</h2>
-            <div class="contact-container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>Información de contacto</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal #123, Centro, Ciudad</p>
+                    <h3>Visítanos</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Centro, Ciudad</p>
                     <p><i class="fas fa-phone"></i> (555) 123-4567</p>
                     <p><i class="fas fa-envelope"></i> info@zapateriajimenez.com</p>
-                    <h3>Horario de atención</h3>
-                    <p>Lunes a Viernes: 9:00 - 19:00</p>
-                    <p>Sábado: 9:00 - 15:00</p>
+
+                    <h3>Horario</h3>
+                    <p>Lunes a Viernes: 9:00 am - 7:00 pm</p>
+                    <p>Sábado: 9:00 am - 3:00 pm</p>
                     <p>Domingo: Cerrado</p>
+
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
                 </div>
+
                 <div class="contact-form">
                     <h3>Envíanos un mensaje</h3>
-                    <form id="contactForm">
+                    <form>
                         <div class="form-group">
-                            <input type="text" id="name" placeholder="Nombre completo" required>
+                            <input type="text" placeholder="Nombre" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" placeholder="Correo electrónico" required>
+                            <input type="email" placeholder="Correo electrónico" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="phone" placeholder="Teléfono">
+                            <input type="tel" placeholder="Teléfono">
                         </div>
                         <div class="form-group">
-                            <textarea id="message" rows="5" placeholder="Tu mensaje" required></textarea>
+                            <textarea placeholder="Mensaje" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn">Enviar mensaje</button>
                     </form>
+                </div>
+
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.888614771461!2d-99.1678269241646!3d19.426971040921835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c366f0e2de02ff7!2sEl%20%C3%81ngel%20de%20la%20Independencia!5e0!3m2!1ses-419!2smx!4v1689297994544!5m2!1ses-419!2smx"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="cart-modal">
-        <div class="cart-content">
-            <span class="close-cart">&times;</span>
-            <h2>Tu Carrito</h2>
-            <div class="cart-items">
-                <!-- Los productos se añadirán aquí dinámicamente -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>Suscríbete a nuestro boletín</h3>
+                <p>Recibe ofertas exclusivas y novedades sobre nuestras colecciones</p>
             </div>
-            <div class="cart-total">
-                <p>Total: <span class="total-amount">$0.00</span></p>
-            </div>
-            <button class="checkout-btn">Proceder al pago</button>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit" class="btn">Suscribirse</button>
+            </form>
         </div>
-    </div>
+    </section>
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Zapatería Jiménez</h3>
-                    <p>Calzado de calidad para toda la familia desde 1990.</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Logo Zapatería Jiménez">
+                        <h4>Zapatería <span>Jiménez</span></h4>
+                    </div>
+                    <p>Calzado de calidad artesanal para toda la familia desde 1990.</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Enlaces rápidos</h3>
+
+                <div class="footer-col">
+                    <h4>Enlaces rápidos</h4>
                     <ul>
                         <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#hombres">Hombres</a></li>
+                        <li><a href="#mujeres">Mujeres</a></li>
+                        <li><a href="#ninos">Niños</a></li>
                         <li><a href="#ofertas">Ofertas</a></li>
-                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Redes sociales</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+
+                <div class="footer-col">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#">Envíos a domicilio</a></li>
+                        <li><a href="#">Cambios y devoluciones</a></li>
+                        <li><a href="#">Preguntas frecuentes</a></li>
+                        <li><a href="#">Guía de tallas</a></li>
+                        <li><a href="#">Cuidado del calzado</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Métodos de pago</h4>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
                     </div>
+                    <h4 class="footer-newsletter">Boletín</h4>
+                    <form>
+                        <input type="email" placeholder="Correo electrónico">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
                 </div>
             </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2023 Zapatería Jiménez. Todos los derechos reservados.</p>
+                <p>© 2023 Zapatería Jiménez. Todos los derechos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Términos y condiciones</a>
+                    <a href="#">Política de privacidad</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu carrito</h3>
+            <button class="close-cart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items">
+            <p class="empty-cart">Tu carrito está vacío</p>
+        </div>
+        <div class="cart-total">
+            <p>Total: <span>$0.00</span></p>
+            <button class="btn checkout-btn">Proceder al pago</button>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
