@@ -41,33 +41,6 @@
     </header>
 
     <main>
-        <section class="hero" aria-labelledby="hero-title">
-            <h1 id="hero-title" class="hidden">Mensaje de Bienvenida</h1>
-            <p class="hero-text">Me gustaría saber qué te parece esta página.</p>
-            <p class="hero-text">Si hay algo que crees que se puede mejorar, ¡tus ideas y sugerencias serán más que bien recibidas!</p>
-            <p class="hero-text">Gracias por tomarte un rato para ayudarme con esto.</p>
-        </section>
-
-        <section id="formulario-coment" class="info-section" aria-labelledby="formulario-title">
-            <h1 id="formulario-title">Envía tus comentarios</h1>
-            <form action="https://formsubmit.co/Vargasfrancisconeri@gmail.com" method="POST" id="contact-form">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="name" required placeholder="Tu nombre"/>
-
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" required placeholder="Tu correo electrónico"/>
-
-                <label for="message">Mensaje:</label>
-                <textarea id="message" name="message" rows="4" required placeholder="Escribe tus comentarios aquí"></textarea>
-
-                <input type="hidden" name="_subject" value="Nuevo comentario" />
-                <input type="hidden" name="_next" value="https://km896.github.io/ne/contacto.html" />
-                <input type="hidden" name="_captcha" value="false" />
-
-                <button type="submit" class="submit-btn">Enviar comentario</button>
-            </form>
-        </section>
-
         <section class="hero" id="inicio">
             <div class="container">
                 <div class="hero-content">
@@ -381,30 +354,32 @@
 
         <section class="comments">
             <div class="container">
-                <h2 class="section-title">Deja tu <span>comentario</span></h2>
-                <div class="comment-form">
-                    <form id="comment-form">
-                        <div class="form-group">
-                            <input type="text" name="name" placeholder="Nombre" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="comment" placeholder="Tu comentario" rows="5" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="rating">Calificación:</label>
-                            <select name="rating" required>
-                                <option value="1">1 Estrella</option>
-                                <option value="2">2 Estrellas</option>
-                                <option value="3">3 Estrellas</option>
-                                <option value="4">4 Estrellas</option>
-                                <option value="5">5 Estrellas</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn">Enviar comentario</button>
+                <section class="hero" aria-labelledby="hero-title">
+                    <h1 id="hero-title" class="hidden">Mensaje de Bienvenida</h1>
+                    <p class="hero-text">Me gustaría saber qué te parece esta página.</p>
+                    <p class="hero-text">Si hay algo que crees que se puede mejorar, ¡tus ideas y sugerencias serán más que bien recibidas!</p>
+                    <p class="hero-text">Gracias por tomarte un rato para ayudarme con esto.</p>
+                </section>
+
+                <section id="formulario-coment" class="info-section" aria-labelledby="formulario-title">
+                    <h1 id="formulario-title">Envía tus comentarios</h1>
+                    <form action="https://formsubmit.co/Vargasfrancisconeri@gmail.com" method="POST" id="contact-form">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre"/>
+
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" required placeholder="Tu correo electrónico"/>
+
+                        <label for="message">Mensaje:</label>
+                        <textarea id="message" name="message" rows="4" required placeholder="Escribe tus comentarios aquí"></textarea>
+
+                        <input type="hidden" name="_subject" value="Nuevo comentario" />
+                        <input type="hidden" name="_next" value="https://km896.github.io/ne/contacto.html" />
+                        <input type="hidden" name="_captcha" value="false" />
+
+                        <button type="submit" class="submit-btn">Enviar comentario</button>
                     </form>
-                </div>
-                <div class="comments-grid">
-                </div>
+                </section>
             </div>
         </section>
 
