@@ -8,8 +8,6 @@ const cartCount = document.querySelector('.cart-count');
 const checkoutBtn = document.querySelector('.checkout-btn');
 const commentForm = document.querySelector('#comment-form');
 const commentsContainer = document.querySelector('.comments-grid');
-
-// Notification styles
 const style = document.createElement('style');
 style.textContent = `
     .notification {
@@ -79,7 +77,6 @@ cartOverlay.addEventListener('click', () => {
     cartOverlay.classList.remove('active');
 });
 
-// Add to cart
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', () => {
         const id = button.getAttribute('data-id');
@@ -99,8 +96,6 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
         }
 
         updateCart();
-
-        // Show notification
         const notification = document.createElement('div');
         notification.className = 'notification';
         notification.textContent = `${name} añadido al carrito`;
@@ -113,14 +108,12 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
     });
 });
 
-// Update cart UI
 function updateCart() {
     renderCartItems();
     updateCartTotal();
     updateCartCount();
 }
 
-// Render cart items
 function renderCartItems() {
     cartItemsContainer.innerHTML = '';
     if (cart.length === 0) {
@@ -147,7 +140,6 @@ function renderCartItems() {
         cartItemsContainer.appendChild(cartItemElement);
     });
 
-    // Event listeners for quantity buttons
     document.querySelectorAll('.decrease-ququantity').forEach(button => {
         button.addEventListener('click', () => {
             const id = button.getAttribute('data-id');
@@ -179,19 +171,15 @@ function renderCartItems() {
     });
 }
 
-// Update cart total
 function updateCartTotal() {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cartTotal.textContent = `$${total.toFixed(2)}`;
 }
-
-// Update cart count
 function updateCartCount() {
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = count;
 }
 
-// PDF Generation with Enhanced Design
 checkoutBtn.addEventListener('click', () => {
     if (cart.length === 0) {
         alert('Tu carrito está vacío');
@@ -205,15 +193,13 @@ checkoutBtn.addEventListener('click', () => {
         format: 'a4'
     });
 
-    // Colors and fonts
     const primaryColor = '#2c3e50';
     const accentColor = '#e74c3c';
     const lightGray = '#f1f1f1';
     doc.setFont('Helvetica');
 
-    // Header
     doc.setFillColor(primaryColor);
-    doc.rect(0, 0, 210, 35, 'F'); // Header background
+    doc.rect(0, 0, 210, 35, 'F'); 
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(24);
     doc.setFont('Helvetica', 'bold');
@@ -229,7 +215,6 @@ checkoutBtn.addEventListener('click', () => {
     doc.setFontSize(14);
     doc.text('ZJ', 30, 22, { align: 'center' });
 
-    // Receipt title and metadata
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(16);
     doc.setFont('Helvetica', 'bold');
@@ -240,7 +225,6 @@ checkoutBtn.addEventListener('click', () => {
     doc.text(`Hora: ${new Date().toLocaleTimeString('es-MX')}`, 20, 59);
     doc.text(`Recibo #: ${Math.floor(Math.random() * 1000000).toString().padStart(6, '0')}`, 20, 65);
 
-    // Table header
     doc.setFillColor(200, 200, 200);
     doc.rect(20, 75, 170, 8, 'F');
     doc.setFontSize(11);
@@ -250,27 +234,24 @@ checkoutBtn.addEventListener('click', () => {
     doc.text('P. Unitario', 130, 81);
     doc.text('Total', 170, 81, { align: 'right' });
 
-    // Table content
     let y = 83;
     cart.forEach((item, index) => {
         y += 8;
         doc.setFillColor(index % 2 === 0 ? lightGray : 255, 255, 255);
         doc.rect(20, y, 170, 8, 'F');
         doc.setFont('Helvetica', 'normal');
-        doc.text(item.name.substring(0, 35), 22, y + 6); // Truncate long names
+        doc.text(item.name.substring(0, 35), 22, y + 6); 
         doc.text(`${item.quantity}`, 100, y + 6);
         doc.text(`$${item.price.toFixed(2)}`, 130, y + 6);
         doc.text(`$${(item.price * item.quantity).toFixed(2)}`, 170, y + 6, { align: 'right' });
     });
 
-    // Table borders
     doc.setDrawColor(0);
-    doc.rect(20, 75, 170, y - 67); // Outer table border
-    doc.line(20, 83, 190, 83); // Header separator
-    doc.line(95, 75, 95, y); // Column separator: Cantidad
-    doc.line(125, 75, 125, y); // Column separator: Precio Unitario
+    doc.rect(20, 75, 170, y - 67); 
+    doc.line(20, 83, 190, 83);
+    doc.line(95, 75, 95, y); 
+    doc.line(125, 75, 125, y);
 
-    // Total section
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     y += 12;
     doc.setFillColor(accentColor);
@@ -280,20 +261,17 @@ checkoutBtn.addEventListener('click', () => {
     doc.setFontSize(12);
     doc.text(`Total: $${total.toFixed(2)}`, 170, y + 6, { align: 'right' });
 
-    // Footer
     y += 20;
     doc.setDrawColor(primaryColor);
-    doc.line(20, y, 190, y); // Footer separator
+    doc.line(20, y, 190, y); 
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(10);
     doc.setFont('Helvetica', 'italic');
     doc.text('Gracias por su compra en Zapatería Jiménez. ¡Esperamos verle pronto!', 105, y + 10, { align: 'center' });
     doc.text('[Facebook] [Instagram] [WhatsApp]', 105, y + 15, { align: 'center' });
 
-    // Save PDF
     doc.save('recibo_zapateria_jimenez.pdf');
 
-    // Clear cart after purchase
     cart = [];
     updateCart();
     cartSidebar.classList.remove('active');
@@ -301,7 +279,6 @@ checkoutBtn.addEventListener('click', () => {
     alert('Compra realizada con éxito. El recibo ha sido descargado.');
 });
 
-// Comments Section
 function loadComments() {
     const comments = JSON.parse(localStorage.getItem('comments')) || [];
     commentsContainer.innerHTML = '';
@@ -347,5 +324,4 @@ commentForm.addEventListener('submit', (e) => {
     loadComments();
 });
 
-// Initialize comments
 loadComments();
