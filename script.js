@@ -140,7 +140,7 @@ function renderCartItems() {
         cartItemsContainer.appendChild(cartItemElement);
     });
 
-    document.querySelectorAll('.decrease-ququantity').forEach(button => {
+    document.querySelectorAll('.decrease-quantity').forEach(button => {
         button.addEventListener('click', () => {
             const id = button.getAttribute('data-id');
             const item = cart.find(item => item.id === id);
@@ -175,6 +175,7 @@ function updateCartTotal() {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cartTotal.textContent = `$${total.toFixed(2)}`;
 }
+
 function updateCartCount() {
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = count;
@@ -255,7 +256,7 @@ checkoutBtn.addEventListener('click', () => {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     y += 12;
     doc.setFillColor(accentColor);
-    doc.rect(125, y, 65, 8, 'F Orm);
+    doc.rect(125, y, 65, 8, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFont('Helvetica', 'bold');
     doc.setFontSize(12);
