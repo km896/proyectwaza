@@ -221,7 +221,7 @@
                                 <div class="colors">
                                     <span class="color blue"></span>
                                     <span class="color red"></span>
-                                    <span class="color green"></i>
+                                    <span class="color green"></span>
                                 </div>
                             </div>
                             <button class="add-to-cart" data-id="301" data-name="Tenis Infantiles" data-price="790">Añadir al carrito</button>
@@ -410,32 +410,31 @@
 
         <section class="contact" id="contacto">
             <div class="container">
-                <section class="hero" aria-labelledby="hero-title">
-                    <h1 id="hero-title" class="hidden">Mensaje de Bienvenida</h1>
-                    <p class="hero-text">Me gustaría saber qué te parece esta página.</p>
-                    <p class="hero-text">Si hay algo que crees que se puede mejorar, ¡tus ideas y sugerencias serán más que bien recibidas!</p>
-                    <p class="hero-text">Gracias por tomarte un rato para ayudarme con esto.</p>
-                </section>
-
-                <section id="formulario-coment" class="info-section" aria-labelledby="formulario-title">
-                    <h1 id="formulario-title">Envía tus comentarios</h1>
-                    <form action="https://formsubmit.co/Vargasfrancisconeri@gmail.com" method="POST" id="contact-form">
-                        <label for="name">Nombre:</label>
-                        <input type="text" id="name" name="name" required placeholder="Tu nombre"/>
-
-                        <label for="email">Correo Electrónico:</label>
-                        <input type="email" id="email" name="email" required placeholder="Tu correo electrónico"/>
-
-                        <label for="message">Mensaje:</label>
-                        <textarea id="message" name="message" rows="4" required placeholder="Escribe tus comentarios aquí"></textarea>
-
-                        <input type="hidden" name="_subject" value="Nuevo comentario" />
-                        <input type="hidden" name="_next" value="https://km896.github.io/ne/contacto.html" />
-                        <input type="hidden" name="_captcha" value="false" />
-
-                        <button type="submit" class="submit-btn">Enviar comentario</button>
-                    </form>
-                </section>
+                <h2 class="section-title">Envía tus <span>Comentarios</span></h2>
+                <div class="contact-content">
+                    <div class="contact-form">
+                        <h3>¿Qué te parece nuestra página?</h3>
+                        <p>Si hay algo que crees que se puede mejorar, ¡tus ideas y sugerencias serán más que bien recibidas! Gracias por tomarte un rato para ayudarnos.</p>
+                        <form action="https://formsubmit.co/Vargasfrancisconeri@gmail.com" method="POST" id="contact-form">
+                            <div class="form-group">
+                                <label for="name">Nombre:</label>
+                                <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico:</label>
+                                <input type="email" id="email" name="email" required placeholder="Tu correo electrónico">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mensaje:</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="Escribe tus comentarios aquí"></textarea>
+                            </div>
+                            <input type="hidden" name="_subject" value="Nuevo comentario">
+                            <input type="hidden" name="_next" value="https://km896.github.io/ne/contacto.html">
+                            <input type="hidden" name="_captcha" value="false">
+                            <button type="submit" class="btn">Enviar comentario</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
 
