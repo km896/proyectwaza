@@ -148,7 +148,7 @@ function renderCartItems() {
     });
 
     // Event listeners for quantity buttons
-    document.querySelectorAll('.decrease-quantity').forEach(button => {
+    document.querySelectorAll('.decrease-ququantity').forEach(button => {
         button.addEventListener('click', () => {
             const id = button.getAttribute('data-id');
             const item = cart.find(item => item.id === id);
@@ -206,68 +206,89 @@ checkoutBtn.addEventListener('click', () => {
     });
 
     // Colors and fonts
-    doc.setFont('Helvetica', 'bold');
     const primaryColor = '#2c3e50';
     const accentColor = '#e74c3c';
     const lightGray = '#f1f1f1';
+    doc.setFont('Helvetica');
 
     // Header
     doc.setFillColor(primaryColor);
-    doc.rect(0, 0, 210, 30, 'F');
+    doc.rect(0, 0, 210, 35, 'F'); // Header background
     doc.setTextColor(255, 255, 255);
-    doc.setFontSize(20);
-    doc.text('Zapatería Jiménez', 105, 15, { align: 'center' });
+    doc.setFontSize(24);
+    doc.setFont('Helvetica', 'bold');
+    doc.text('Zapatería Jiménez', 105, 20, { align: 'center' });
     doc.setFontSize(10);
-    doc.text('Av. Principal 123, Centro, Ciudad', 105, 22, { align: 'center' });
-    doc.text('info@zapateriajimenez.com | (555) 123-4567', 105, 27, { align: 'center' });
+    doc.setFont('Helvetica', 'normal');
+    doc.text('Av. Principal 123, Centro, Ciudad | info@zapateriajimenez.com | (555) 123-4567', 105, 28, { align: 'center' });
+
+    // Logo placeholder
+    doc.setDrawColor(accentColor);
+    doc.setLineWidth(0.5);
+    doc.rect(20, 10, 20, 20);
+    doc.setFontSize(14);
+    doc.text('ZJ', 30, 22, { align: 'center' });
 
     // Receipt title and metadata
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(16);
-    doc.text('Recibo de Compra', 20, 40);
+    doc.setFont('Helvetica', 'bold');
+    doc.text('Recibo de Compra', 20, 45);
     doc.setFontSize(10);
     doc.setFont('Helvetica', 'normal');
-    doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, 20, 48);
-    doc.text(`Hora: ${new Date().toLocaleTimeString('es-MX')}`, 20, 54);
+    doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, 20, 53);
+    doc.text(`Hora: ${new Date().toLocaleTimeString('es-MX')}`, 20, 59);
+    doc.text(`Recibo #: ${Math.floor(Math.random() * 1000000).toString().padStart(6, '0')}`, 20, 65);
 
     // Table header
-    doc.setFont('Helvetica', 'bold');
-    doc.setFontSize(12);
     doc.setFillColor(200, 200, 200);
-    doc.rect(20, 60, 170, 8, 'F');
-    doc.text('Producto', 22, 66);
-    doc.text('Cantidad', 120, 66);
-    doc.text('Precio', 160, 66, { align: 'right' });
+    doc.rect(20, 75, 170, 8, 'F');
+    doc.setFontSize(11);
+    doc.setFont('Helvetica', 'bold');
+    doc.text('Producto', 22, 81);
+    doc.text('Cant.', 100, 81);
+    doc.text('P. Unitario', 130, 81);
+    doc.text('Total', 170, 81, { align: 'right' });
 
     // Table content
-    let y = 68;
+    let y = 83;
     cart.forEach((item, index) => {
         y += 8;
         doc.setFillColor(index % 2 === 0 ? lightGray : 255, 255, 255);
         doc.rect(20, y, 170, 8, 'F');
         doc.setFont('Helvetica', 'normal');
-        doc.text(item.name, 22, y + 6);
-        doc.text(`${item.quantity}`, 120, y + 6);
-        doc.text(`$${(item.price * item.quantity).toFixed(2)}`, 160, y + 6, { align: 'right' });
+        doc.text(item.name.substring(0, 35), 22, y + 6); // Truncate long names
+        doc.text(`${item.quantity}`, 100, y + 6);
+        doc.text(`$${item.price.toFixed(2)}`, 130, y + 6);
+        doc.text(`$${(item.price * item.quantity).toFixed(2)}`, 170, y + 6, { align: 'right' });
     });
 
-    // Table border
+    // Table borders
     doc.setDrawColor(0);
-    doc.rect(20, 60, 170, y - 52); // Adjust height based on items
+    doc.rect(20, 75, 170, y - 67); // Outer table border
+    doc.line(20, 83, 190, 83); // Header separator
+    doc.line(95, 75, 95, y); // Column separator: Cantidad
+    doc.line(125, 75, 125, y); // Column separator: Precio Unitario
 
-    // Total
+    // Total section
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    y += 12;
+    doc.setFillColor(accentColor);
+    doc.rect(125, y, 65, 8, 'F Orm);
+    doc.setTextColor(255, 255, 255);
     doc.setFont('Helvetica', 'bold');
     doc.setFontSize(12);
-    doc.setTextColor(accentColor);
-    doc.text(`Total: $${total.toFixed(2)}`, 160, y + 12, { align: 'right' });
+    doc.text(`Total: $${total.toFixed(2)}`, 170, y + 6, { align: 'right' });
 
     // Footer
-    doc.setFontSize(10);
+    y += 20;
+    doc.setDrawColor(primaryColor);
+    doc.line(20, y, 190, y); // Footer separator
     doc.setTextColor(0, 0, 0);
+    doc.setFontSize(10);
     doc.setFont('Helvetica', 'italic');
-    doc.text('Gracias por su compra en Zapatería Jiménez.', 105, 270, { align: 'center' });
-    doc.text('¡Esperamos verle pronto!', 105, 275, { align: 'center' });
+    doc.text('Gracias por su compra en Zapatería Jiménez. ¡Esperamos verle pronto!', 105, y + 10, { align: 'center' });
+    doc.text('[Facebook] [Instagram] [WhatsApp]', 105, y + 15, { align: 'center' });
 
     // Save PDF
     doc.save('recibo_zapateria_jimenez.pdf');
